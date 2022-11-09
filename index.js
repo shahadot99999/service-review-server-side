@@ -36,6 +36,20 @@ async function run() {
         })
 
         //appointment
+
+        app.get('/appointments', async (req, res) => {
+            let query = {};
+
+            if (req.query.email) {
+                query = {
+                    email: req.query.email
+                }
+            }
+            const cursor = appointmentCollection.find(query);
+            const appoints = await cursor.toArray();
+            res.send(appoints);
+        })
+
         app.post('/appointments', async (req, res) => {
             const appointment = req.body;
             const result = await appointmentCollection.insertOne(appointment);

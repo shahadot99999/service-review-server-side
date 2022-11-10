@@ -55,6 +55,14 @@ async function run() {
             const result = await appointmentCollection.insertOne(appointment);
             res.send(result);
         })
+
+        app.get('/appointments/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await serviceCollection.deleteOne(query);
+            res.send(result);
+        })
+
     }
     finally {
 
